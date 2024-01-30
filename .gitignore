@@ -1,6 +1,5 @@
 .idea
 tmp/*
-dist/*
 log/*
 test/*
 upload/*
