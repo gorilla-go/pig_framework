@@ -10,6 +10,10 @@ import (
 	"strings"
 )
 
+var templateFunc = template.FuncMap(map[string]any{
+	"render": render,
+})
+
 var templateCache = make(map[string][]byte)
 
 type templateWriter struct {
@@ -28,10 +32,6 @@ func render(templatePath string, o any) string {
 	if ext != "" {
 		filePath += "." + ext
 	}
-
-	funcMap := template.FuncMap(map[string]any{
-		"render": render,
-	})
 
 	var file []byte
 	var err error
@@ -52,7 +52,9 @@ func render(templatePath string, o any) string {
 		}
 	}
 
-	tmpl, err := template.New(templatePath).Funcs(funcMap).Parse(string(file))
+	tmpl, err := template.New(templatePath).
+		Funcs(template.FuncMap(templateFunc)).
+		Parse(string(file))
 	if err != nil {
 		panic(err)
 	}
