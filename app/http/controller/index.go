@@ -2,10 +2,12 @@ package controller
 
 import (
 	"github.com/gorilla-go/pig"
+	"pig_framework/app/http/helpers"
+	"time"
 )
 
 func Index(ctx *pig.Context) {
-	ctx.Response().Html(
-		"<html><h2>P.I.G web framework</h2><a href=\"https://pig.gitbook.io/p.i.g-framework\">document</a></html>",
-	)
+	helpers.View(ctx, "index", map[string]string{
+		"time": time.Now().Format("2006-01-02 15:04:05"),
+	})
 }

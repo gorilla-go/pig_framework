@@ -28,4 +28,9 @@ var config = map[string]any{
 	"MYSQL_DATABASE": "test_main",
 	"MYSQL_USERNAME": "root",
 	"MYSQL_PASSWORD": "root",
+
+	// template
+	"TEMPLATE_WRAPPER_STR": "__WRAPPER__",
+	"TEMPLATE_PATH":        RootPath() + "/app/http/view/",
+	"TEMPLATE_EXT":         "html",
 }

@@ -6,3 +6,8 @@
 ```shell
 go run ./bin/main.go
 ```
+
+### Docker
+```shell
+docker run 
+```
