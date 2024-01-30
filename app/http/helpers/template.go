@@ -50,7 +50,7 @@ func render(templatePath string, o any) string {
 
 	tmpl, err := template.New(templatePath).
 		Funcs(template.FuncMap(map[string]any{
-			"render": render,
+			"render": Render,
 		})).
 		Parse(string(file))
 	if err != nil {
