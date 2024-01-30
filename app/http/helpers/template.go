@@ -10,10 +10,6 @@ import (
 	"strings"
 )
 
-var templateFunc = template.FuncMap(map[string]any{
-	"render": render,
-})
-
 var templateCache = make(map[string][]byte)
 
 type templateWriter struct {
@@ -53,7 +49,9 @@ func render(templatePath string, o any) string {
 	}
 
 	tmpl, err := template.New(templatePath).
-		Funcs(template.FuncMap(templateFunc)).
+		Funcs(template.FuncMap(map[string]any{
+			"render": render,
+		})).
 		Parse(string(file))
 	if err != nil {
 		panic(err)
