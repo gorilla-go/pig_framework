@@ -1,9 +1,11 @@
-package middleware
+package middlewares
 
 import (
 	"fmt"
 	"github.com/gorilla-go/pig"
 	"github.com/gorilla-go/pig/di"
+	"github.com/sirupsen/logrus"
+	"net/http"
 	"pig_framework/config"
 	"runtime/debug"
 )
@@ -12,17 +14,17 @@ type ErrorHandlerService struct {
 }
 
 func (e *ErrorHandlerService) Handle(a any, context *pig.Context) {
-	d := config.DefaultConfig[bool]("app.debug", false)
-	if d {
+	if config.DefaultConfig[bool]("APP_DEBUG", false) {
 		context.Response().Text(fmt.Sprintf(
-			"Error: %s\n%s",
+			"Error: %s\n\r%s",
 			a,
 			debug.Stack()),
 		)
 		return
 	}
 
-	context.Response().Raw().WriteHeader(500)
+	logrus.WithFields(map[string]interface{}{}).Errorln(a)
+	context.Response().Raw().WriteHeader(http.StatusInternalServerError)
 }
 
 type ErrorHandler struct {
