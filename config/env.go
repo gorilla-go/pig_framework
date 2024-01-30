@@ -1,9 +1,9 @@
 package config
 
 var config = map[string]any{
-	"APP_PORT":         8081,
-	"APP_DEBUG":        true,
-	"DEFAULT_TIMEZONE": "Asia/Shanghai",
+	"APP_PORT":     8081,
+	"APP_DEBUG":    true,
+	"APP_TIMEZONE": "Asia/Shanghai",
 
 	// log
 	"LOG_ENABLE": true,
