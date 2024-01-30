@@ -65,6 +65,10 @@ func render(templatePath string, o any) string {
 }
 
 func View(ctx *pig.Context, template string, o any, wrapper ...string) {
+	ctx.Response().Html(Render(template, o, wrapper...))
+}
+
+func Render(template string, o any, wrapper ...string) string {
 	if wrapper != nil && len(wrapper) > 0 {
 		t := config.Config[string]("TEMPLATE_WRAPPER_STR")
 		content := render(template, o)
@@ -76,8 +80,7 @@ func View(ctx *pig.Context, template string, o any, wrapper ...string) {
 				1,
 			)
 		}
-		ctx.Response().Html(content)
-		return
+		return content
 	}
-	ctx.Response().Html(render(template, o))
+	return render(template, o)
 }
