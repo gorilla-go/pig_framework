@@ -19,6 +19,8 @@ github.com/gorilla-go/pig v0.0.0-20240129041723-7866acf29f93 h1:ODsaZZzpnVBlBEP+
 github.com/gorilla-go/pig v0.0.0-20240129041723-7866acf29f93/go.mod h1:/AN2LyXkJ5mumTy4To043ubkSVuM9rIHJcpMwGTADf0=
 github.com/gorilla-go/pig v0.0.0-20240129060529-2725dda14312 h1:VHpEHrKLAA0A4/1EW7WkNhsPjn7Jgklk0dodXey2Cik=
 github.com/gorilla-go/pig v0.0.0-20240129060529-2725dda14312/go.mod h1:/AN2LyXkJ5mumTy4To043ubkSVuM9rIHJcpMwGTADf0=
+github.com/gorilla-go/pig v0.0.0-20240131023643-77289452be13 h1:KbBOByFTq6yaMeDy4Fe5nRtAX4MlvmD3+ic6O5Z0XCk=
+github.com/gorilla-go/pig v0.0.0-20240131023643-77289452be13/go.mod h1:/AN2LyXkJ5mumTy4To043ubkSVuM9rIHJcpMwGTADf0=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=
 github.com/jinzhu/inflection v1.0.0/go.mod h1:h+uFLlag+Qp1Va5pdKtLDYj+kHp5pxUVkryuEj+Srlc=
 github.com/jinzhu/now v1.1.5 h1:/o9tlHleP7gOFmsnYNz3RGnqzefHA47wQpKrrdTIwXQ=

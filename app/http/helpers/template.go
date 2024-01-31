@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"github.com/gorilla-go/pig"
+	"github.com/gorilla-go/pig/di"
 	"html"
 	"html/template"
 	"os"
@@ -11,6 +12,7 @@ import (
 )
 
 var templateCache = make(map[string][]byte)
+var templateFunctions = map[string]any{}
 
 type templateWriter struct {
 	html string
@@ -21,7 +23,7 @@ func (w *templateWriter) Write(p []byte) (n int, err error) {
 	return len(p), nil
 }
 
-func render(templatePath string, o any) string {
+func render(ctx *pig.Context, templatePath string, o any) string {
 	s := config.Config[string]("TEMPLATE_PATH")
 	ext := config.Config[string]("TEMPLATE_EXT")
 	filePath := filepath.Dir(s) + "/" + templatePath
@@ -48,10 +50,15 @@ func render(templatePath string, o any) string {
 		}
 	}
 
+	functions := map[string]any{
+		"render": Render,
+		"url":    di.MustInvoke[pig.IRouter](ctx.Container()).Url,
+	}
+	for n, f := range templateFunctions {
+		functions[n] = f
+	}
 	tmpl, err := template.New(templatePath).
-		Funcs(template.FuncMap(map[string]any{
-			"render": Render,
-		})).
+		Funcs(template.FuncMap(functions)).
 		Parse(string(file))
 	if err != nil {
 		panic(err)
@@ -65,16 +72,16 @@ func render(templatePath string, o any) string {
 }
 
 func View(ctx *pig.Context, template string, o any, wrapper ...string) {
-	ctx.Response().Html(Render(template, o, wrapper...))
+	ctx.Response().Html(Render(ctx, template, o, wrapper...))
 }
 
-func Render(template string, o any, wrapper ...string) string {
+func Render(ctx *pig.Context, template string, o any, wrapper ...string) string {
 	if wrapper != nil && len(wrapper) > 0 {
 		t := config.Config[string]("TEMPLATE_WRAPPER_STR")
-		content := render(template, o)
+		content := render(ctx, template, o)
 		for _, wrapperPath := range wrapper {
 			content = strings.Replace(
-				render(wrapperPath, o),
+				render(ctx, wrapperPath, o),
 				t,
 				content,
 				1,
@@ -82,5 +89,5 @@ func Render(template string, o any, wrapper ...string) string {
 		}
 		return content
 	}
-	return render(template, o)
+	return render(ctx, template, o)
 }
