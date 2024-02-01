@@ -9,7 +9,7 @@ import (
 type Timezone struct {
 }
 
-func (t Timezone) Handle(context *pig.Context, f func(*pig.Context)) {
+func (t *Timezone) Handle(context *pig.Context, f func(*pig.Context)) {
 	location, err := time.LoadLocation(
 		config.DefaultConfig("APP_TIMEZONE", "Asia/Shanghai"),
 	)

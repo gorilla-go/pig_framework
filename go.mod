@@ -4,7 +4,7 @@ go 1.21.5
 
 require (
 	github.com/go-session/session v3.1.2+incompatible
-	github.com/gorilla-go/pig v0.0.0-20240131023643-77289452be13
+	github.com/gorilla-go/pig v0.0.0-20240201070937-f58dbcd091ee
 	github.com/sirupsen/logrus v1.9.3
 	gorm.io/driver/mysql v1.5.2
 	gorm.io/gorm v1.25.6
